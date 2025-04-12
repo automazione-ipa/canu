@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 api_key = os.getenv('API_KEY')
 URL = os.getenv('completition.url')
-model_version=os.getenv('completition.nodel.v1')
+model_version=os.getenv('completition.nodel.v2')
 # Endpoint delle API
 url = URL
 
