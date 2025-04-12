@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 api_key = os.getenv('API_KEY')
 URL = os.getenv('completition.url')
+model_version=os.getenv('completition.nodel.v1')
 # Endpoint delle API
 url = URL
 
@@ -24,7 +25,7 @@ def get_contextual_answer(text, question):
     }
 
     data = {
-        "model": "gpt-4o-mini",
+        "model": model_version,
         "messages": messages,
         "temperature": 0.7
     }
