@@ -7,9 +7,9 @@ from dotenv import load_dotenv
 #API Key
 load_dotenv()
 api_key = os.getenv('API_KEY')
-
+URL = os.getenv('completition.url')
 # Endpoint delle API
-url = "https://api.openai.com/v1/chat/completions"
+url = URL
 
 def get_contextual_answer(text, question):
 

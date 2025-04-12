@@ -5,9 +5,9 @@ from dotenv import load_dotenv
 #API Key
 load_dotenv()
 api_key = os.getenv('API_KEY')
-
+URL = os.getenv('completition.url')
 # Endpoint delle API
-url = "https://api.openai.com/v1/chat/completions"
+url = URL
 
 # La domanda da inviare
 user_question = input("Scrivi la tua domanda: ")
