@@ -1,0 +1,15 @@
+Descrizione: Vorrei automatizzare la gestione dei ticket che richiedono aggiornamenti di configurazione di backend, leggendo dal ticket i nuovi endpoint e modificando automaticamente il file di configurazione del sistema.
+
+Function-call previsto:
+
+Function-call che legge la descrizione del ticket ed estrae le nuove URL da impostare.
+
+Function-call che apre il file di configurazione, cerca le chiavi specificate e aggiorna i valori con i nuovi endpoint.
+
+(Opzionale) Function-call che esegue un controllo per verificare che il file modificato sia corretto (es: parsing di file .properties o .conf).
+
+Prompt previsto:
+Prevedo questo prompt: "Sono un assistente IT esperto nella gestione di file di configurazione applicativi. Leggo le istruzioni di aggiornamento da ticket e modifico puntualmente il file di configurazione sostituendo i valori richiesti."
+
+Esempio domanda:
+Prevedo questo tipo di domande: "Aggiorna il file di configurazione application.properties modificando i parametri di back-end come specificato nel ticket #89231."
