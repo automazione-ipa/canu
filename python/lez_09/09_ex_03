@@ -1,0 +1,11 @@
+import pyautogui
+
+# l'area da catturare: (left, top, width, height)
+left = 100
+top = 200
+width = 1000
+height = 150
+
+screenshot = pyautogui.screenshot(region=(left, top, width, height))
+
+screenshot.save("area_catturata.png")

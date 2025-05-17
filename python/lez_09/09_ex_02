@@ -1,0 +1,18 @@
+import pyautogui
+import time
+import os
+
+os.system("start notepad.exe")
+
+time.sleep(1)  
+
+pyautogui.write("Ciao mondo!", interval=0.1)
+
+
+pyautogui.hotkey('ctrl', 's')
+
+time.sleep(1)
+
+pyautogui.write("ciao.txt", interval=0.1)
+
+pyautogui.press('enter')
