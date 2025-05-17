@@ -1,7 +1,11 @@
 import requests
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
+URL = os.getenv('ollama.url')
 def genera_ricetta(ingrediente, modello="vegchef"):
-    url = "http://localhost:11434/api/generate"
+    url = URL
 
     # Prompt con template
     prompt = f"Dammi una ricetta vegana semplice con {ingrediente} come ingrediente principale."
