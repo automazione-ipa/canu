@@ -2,47 +2,49 @@ import requests
 import os
 import json
 from dotenv import load_dotenv
-import wikipedia
 
-
+# Carica le variabili d'ambiente
 load_dotenv()
 api_key = os.getenv('API_KEY')
 URL = os.getenv('completition.url')
-model_version = os.getenv('completition.model.v1')
+model_version = os.getenv('completition.nodel.v1')
 
-
+# Headers API
 headers = {
     "Authorization": f"Bearer {api_key}",
     "Content-Type": "application/json"
 }
-wikipedia.set_lang("it")
-def wikipedia_summary(query):
-    """Restituisce un riassunto da Wikipedia."""
+
+def read_file(file_name):
+    """Legge un file e restituisce il contenuto."""
     try:
-        summary = wikipedia.summary(query, sentences=2)
-        return {"summary": summary}
+        with open(file_name, 'r', encoding='utf-8') as f:
+            return {"content": f.read()}
+    except FileNotFoundError:
+        return {"error": f"File non trovato: {file_name}"}
     except Exception as e:
         return {"error": str(e)}
 
-
+# --- JSON Schema per function-calling ---
 functions = [
     {
-        "name": "wikipedia_summary",
-        "description": "Restituisce un riassunto da Wikipedia.",
+        "name": "read_file",
+        "description": "Legge un file e restituisce il contenuto.",
         "parameters": {
             "type": "object",
             "properties": {
-                "query": {
+                "file_name": {
                     "type": "string",
-                    "description": "Argomento da cercare su Wikipedia"
+                    "description": "Percorso del file da leggere"
                 }
             },
-            "required": ["query"]
+            "required": ["file_name"]
         }
     }
 ]
 
-user_question = input("Scrivi il termine per il riassunto su Wikipedia: ")
+# Interazione utente
+user_question = input("Scrivi il nome del file da leggere: ")
 
 data = {
     "model": model_version,
@@ -68,9 +70,9 @@ if response.status_code == 200:
         function_name = message["function_call"]["name"]
         function_args = json.loads(message["function_call"]["arguments"])
 
-        if function_name == "wikipedia_summary":
-            result = wikipedia_summary(**function_args)
-            print(f"Riassunto: {result}")
+        if function_name == "read_file":
+            result = read_file(**function_args)
+            print(f"Contenuto del file: {result}")
         else:
             print(f"Function {function_name} non gestita.")
     else:
