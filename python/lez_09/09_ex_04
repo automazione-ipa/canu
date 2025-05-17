@@ -1,0 +1,40 @@
+import pyautogui
+import time
+import os
+import pyperclip
+# Apri Outlook
+os.system("start outlook.exe")
+time.sleep(5)
+
+#  CTRL+N per aprire una nuova email
+pyautogui.hotkey('ctrl', 'n')
+time.sleep(2)
+
+# indirizzo email del destinatario
+pyautogui.write("ver.spiga", interval=0.05)
+pyperclip.copy("@")
+pyautogui.hotkey("ctrl", "v")
+pyautogui.write("gmail.com", interval=0.05)
+time.sleep(1)
+pyautogui.press('tab')
+pyautogui.press('tab')
+pyautogui.press('tab')
+pyautogui.press('tab')
+time.sleep(0.5)
+
+# Inserisci oggetto
+pyautogui.write("PyAutoGUI test")
+pyautogui.press('tab')
+
+time.sleep(0.5)
+
+# Scrivi mail
+pyautogui.write("Ciao,\n\ntra poco si mangia \n\nSaluti,\nMarco")
+
+time.sleep(1)
+
+#ALT+S per inviare
+pyautogui.hotkey('alt', 's')
+time.sleep(2)
+pyautogui.press('esc')
+print("Email inviata.")
