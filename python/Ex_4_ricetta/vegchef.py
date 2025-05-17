@@ -7,7 +7,7 @@ URL = os.getenv('ollama.url')
 def genera_ricetta(ingrediente, modello="vegchef"):
     url = URL
 
-    # Prompt con template
+
     prompt = f"Dammi una ricetta vegana semplice con {ingrediente} come ingrediente principale."
 
     payload = {
