@@ -1,0 +1,13 @@
+import pyautogui
+
+# Ottieni la larghezza e altezza dello schermo
+width, height = pyautogui.size()
+
+# Calcola il centro dello schermo
+center_x, center_y = width // 2, height // 2
+
+# Sposta il mouse al centro dello schermo
+pyautogui.moveTo(center_x, center_y)
+
+# Fai un click sinistro
+pyautogui.click()
