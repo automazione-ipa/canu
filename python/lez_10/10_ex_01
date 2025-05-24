@@ -1,0 +1,26 @@
+from playwright.sync_api import sync_playwright, expect
+
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=False)  # headless=True per esecuzione silenziosa
+    context = browser.new_context()
+    page = context.new_page()
+
+    page.goto("https://the-internet.herokuapp.com/login")
+
+    
+    ###seleziona un elemento di tipo <input>,seleziona l'elemento che ha id="username"###
+    page.locator('input#username').fill("tomsmith")
+    page.locator('input#password').fill("SuperSecretPassword!")
+
+    # 3. Clicca sul pulsante Login
+    page.locator('button[type="submit"]').click()
+
+    # 4. Verifica che il login abbia avuto successo
+    success_message = page.locator('div.flash.success')
+    expect(success_message).to_be_visible()
+    expect(success_message).to_contain_text("You logged into a secure area!")
+
+    print("Login eseguito con successo.")
+    # 5. Chiudi il browser
+    input("Premi Invio per chiudere il browser...")
+    browser.close()
