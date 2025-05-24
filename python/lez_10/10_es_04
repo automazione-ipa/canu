@@ -1,0 +1,30 @@
+from playwright.sync_api import sync_playwright, expect
+import time
+import os
+
+# Percorso assoluto del file
+file_path = os.path.abspath("esempio.txt")
+
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=False)
+    context = browser.new_context()
+    page = context.new_page()
+
+    page.goto("https://the-internet.herokuapp.com/upload")
+    file_path = os.path.abspath("esempio.txt")
+
+    print("Percorso assoluto del file:", file_path)
+    print("Esiste il file?", os.path.exists(file_path))
+    page.set_input_files("input#file-upload", file_path)
+
+    page.click("input#file-submit")
+
+
+    expect(page.locator("h3")).to_have_text("File Uploaded!")
+    uploaded_file = page.locator("#uploaded-files")
+    expect(uploaded_file).to_contain_text("esempio.txt")
+
+    print("File caricato correttamente!")
+
+    time.sleep(5)
+    browser.close()

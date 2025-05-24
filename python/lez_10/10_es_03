@@ -1,0 +1,31 @@
+from playwright.sync_api import sync_playwright, expect
+import time
+
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=False)
+    context = browser.new_context()
+    page = context.new_page()
+
+    # Visita la pagina
+    page.goto("https://the-internet.herokuapp.com/checkboxes")
+
+    # Seleziona tutte le checkbox presenti
+    checkboxes = page.locator("form#checkboxes input[type='checkbox']")
+
+    count = checkboxes.count()
+
+    # Scorri tutte le checkbox
+    for i in range(count):
+        checkbox = checkboxes.nth(i)
+        if not checkbox.is_checked():
+            checkbox.check()
+
+    # Verifica che ora tutte siano selezionate
+    expect(checkboxes).to_have_count(count)
+    for i in range(count):
+        expect(checkboxes.nth(i)).to_be_checked()
+
+    print("Tutte le checkbox sono selezionate.")
+
+    time.sleep(5)
+    browser.close()
