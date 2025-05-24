@@ -2,6 +2,12 @@ import pyautogui
 import time
 import os
 import pyperclip
+from dotenv import load_dotenv
+
+load_dotenv()
+utente= os.getenv('mail.utente')
+dominio= os.getenv('mail.dominio')
+
 # Apri Outlook
 os.system("start outlook.exe")
 time.sleep(5)
@@ -11,10 +17,10 @@ pyautogui.hotkey('ctrl', 'n')
 time.sleep(2)
 
 # indirizzo email del destinatario
-pyautogui.write("ver.spiga", interval=0.05)
+pyautogui.write("utente", interval=0.05)
 pyperclip.copy("@")
 pyautogui.hotkey("ctrl", "v")
-pyautogui.write("gmail.com", interval=0.05)
+pyautogui.write("dominio", interval=0.05)
 time.sleep(1)
 pyautogui.press('tab')
 pyautogui.press('tab')
