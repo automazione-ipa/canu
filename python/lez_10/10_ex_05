@@ -19,7 +19,6 @@ def run(playwright: Playwright) -> None:
     page.wait_for_timeout(1000)
     page.locator(".mat-radio-outer-circle").first.click()
 
-    # ---------------------
     input()
     context.close()
     browser.close()
