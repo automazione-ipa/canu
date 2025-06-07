@@ -9,7 +9,6 @@ with sync_playwright() as p:
     # Visita la pagina
     page.goto("https://the-internet.herokuapp.com/checkboxes")
 
-    # Seleziona tutte le checkbox presenti
     checkboxes = page.locator("form#checkboxes input[type='checkbox']")
 
     count = checkboxes.count()
